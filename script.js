@@ -40,6 +40,24 @@ function updateTime() {
   }
 }
 
+//Tried to make the new times update but failed
+/*
+function newUpdateTime(newcityTime) {
+  let newcity = newcityTime;
+  let cityElement = document.querySelector(".city");
+  if (cityElement) {
+    let cityDateElement = cityElement.querySelector(".date");
+    let cityTimeElement = cityElement.querySelector(".time");
+    let cityTime = moment().tz(newcity);
+
+    cityDateElement.innerHTML = cityTime.format("MMMM	Do YYYY");
+    cityTimeElement.innerHTML = cityTime.format("h:mm:ss [<small>]A[</small>]");
+
+    console.log(newcityTime);
+  }
+}
+  */
+
 function updateCity(event) {
   let cityTimeZone = event.target.value;
   if (cityTimeZone === "current") {
@@ -49,7 +67,7 @@ function updateCity(event) {
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#cities");
   citiesElement.innerHTML = `
-  <div class="city">
+  <div class="city" id= "${event.target.value}">
     <div>
       <h2>${cityName}</h2>
       <div class="date">${cityTime.format("MMMM	Do YYYY")}</div>
@@ -58,7 +76,11 @@ function updateCity(event) {
     "A"
   )}</small></div>
   </div>
+  <a href="index.html">Beginning page</a>
   `;
+
+  //newUpdateTime(cityTimeZone);
+  // return cityTimeZone;
 }
 
 updateTime();
@@ -66,3 +88,11 @@ setInterval(updateTime, 1000);
 
 let citiesSelectElement = document.querySelector("#city");
 citiesSelectElement.addEventListener("change", updateCity);
+
+/*
+let cityTimeZone = updateCity();
+
+setInterval(newUpdateTime(cityTimeZone), 1000);
+console.log(cityTimeZone); 
+
+*/
